@@ -1,22 +1,29 @@
 {
    "lambdatest_auth": {
-      "username": "nitesh.nitzit",
-      "access_key": "PwOLHF8Hgmbk8RFHBwERMJNDN14cmqyg5GH1XE4yYXjdYSqTAq"
+      "username": "<Your LambdaTest username>",
+      "access_key": "<Your LambdaTest access key>"
    },
    "browsers": [
       {
          "browser": "Chrome",
          "platform": "Windows 10",
          "versions": [
-            "86.0"
+            "latest"
+         ]
+      },
+       {
+         "browser": "firefox",
+         "platform": "Windows 10",
+         "versions": [
+            "latest"
          ]
       }
    ],
    "run_settings": {
-      "cypress_config_file": "./cypress.json",
-      "build_name": "Test-cypress2",
+      "cypress_config_file": "/path/to/<cypress config file>.json",
+      "build_name": "Cypress Sample Demo",
       "parallels": 1,
-      "specs": "cypress\\integration\\examples\\*.spec.js"
+      "specs": "./cypress/integration/examples/*.spec.js"
    },
    "tunnel_settings": {
       "tunnel": false,
