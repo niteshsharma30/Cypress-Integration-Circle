@@ -26,7 +26,7 @@ jobs:
       shell: bash.exe
     steps:
       - checkout
-
+      
       - restore_cache:
           key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
 
@@ -47,11 +47,15 @@ jobs:
       - run:
           name: 'Start server'
           command: npm run start:ci:windows
+            export LT_USERNAME="niteshs"
+            export LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
           background: true
 
       - run:
           name: 'Run Cypress tests'
           command: npm run e2e:record -- --env circle=true
+            export LT_USERNAME="niteshs"
+            export LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
           no_output_timeout: '1m'
           
       - store_artifacts:
@@ -136,8 +140,8 @@ workflows:
           # with different parameters
           name: '3 machines'
           command:
-            export LT_USERNAME="niteshs"
-            export LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
+            set LT_USERNAME="niteshs"
+            set LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
@@ -152,8 +156,8 @@ workflows:
       - cypress/run:
           name: '2 machines using Chrome'
           command:
-            export LT_USERNAME="niteshs"
-            export LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
+            set LT_USERNAME="niteshs"
+            set LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
@@ -171,8 +175,8 @@ workflows:
       - cypress/run:
           name: '2 machines using Firefox'
           command:
-            export LT_USERNAME="niteshs"
-            export LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
+            set LT_USERNAME="niteshs"
+            set LT_ACCESS_KEY="u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk"
           # job will use workspace with code and dependencies
           # installed by the "install" job
           requires:
