@@ -45,13 +45,15 @@ jobs:
       - run:
           name: 'Start server'
           command: npm run start:ci:windows
+            export ${LT_USERNAME}
+            export ${LT_ACCESS_KEY}
           background: true
 
       - run:
           name: 'Run Cypress tests'
           command: 
-            ${LT_USERNAME}
-            ${LT_ACCESS_KEY}
+            export ${LT_USERNAME}
+            export ${LT_ACCESS_KEY}
 
           no_output_timeout: '1m'
           
