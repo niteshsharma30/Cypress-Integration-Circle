@@ -37,12 +37,6 @@ jobs:
 
       # if you want to test execa's behavior on Windows
       # - run: node ./scripts/test-execa
-
-      - run:
-          name: 'Start server'
-          command: npm run start:ci:windows
-          background: true
-
       - run:
           name: 'Run Cypress tests'
           command:
@@ -51,6 +45,11 @@ jobs:
           name: "Installing Lambda package"
           command:
             npm install -g lambdatest-cypress-cli
+
+      - run:
+          name: 'cypress run command'
+          command: lambdatest-cypress run
+         
 
           no_output_timeout: '1m'
           
