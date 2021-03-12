@@ -24,10 +24,6 @@ jobs:
       
       - restore_cache:
           key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-      - run:
-          command: 
-            export LT_USERNAME='niteshs'
-            export LT_ACCESS_KEY='u0GB5rwo9D73x3unYCklAWChvKEZxOmk58N00aw7N0dmjI3jMk'
       - run: npm ci
       - run: npm run cy:verify
       - run: npm run cy:info
@@ -51,7 +47,8 @@ jobs:
 
       - run:
           name: 'Run Cypress tests'
-          command: 
+          command:
+            lambdatest-cypress run 
             export ${LT_USERNAME}
             export ${LT_ACCESS_KEY}
 
