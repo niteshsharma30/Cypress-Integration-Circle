@@ -20,20 +20,9 @@ jobs:
       name: win/vs2019
       shell: bash.exe
     steps:
-      - checkout
-      
-      - restore_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
       - run: npm ci
       - run: npm run cy:verify
       - run: npm run cy:info
-
-      - save_cache:
-          key: dependencies-{{ arch }}-{{ .Branch }}-{{ checksum "package.json" }}
-          paths:
-            # could not use environment variables for some reason
-            - C:\Users\circleci\AppData\Local\Cypress\Cache
-            - C:\Users\circleci\AppData\Roaming\npm-cache
 
       # if you want to test execa's behavior on Windows
       # - run: node ./scripts/test-execa
@@ -41,16 +30,13 @@ jobs:
       - run:
           name: 'Start server'
           command: npm run start:ci:windows
-            export ${LT_USERNAME}
-            export ${LT_ACCESS_KEY}
           background: true
 
       - run:
           name: 'Run Cypress tests'
           command:
-            lambdatest-cypress run 
-            export ${LT_USERNAME}
-            export ${LT_ACCESS_KEY}
+            npm install
+            npm install -g lambdatest-cypress-cli
 
           no_output_timeout: '1m'
           
