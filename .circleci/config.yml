@@ -47,6 +47,9 @@ jobs:
           name: 'Run Cypress tests'
           command:
             npm install
+      - run:
+          name: "Installing Lambda package"
+          command:
             npm install -g lambdatest-cypress-cli
 
           no_output_timeout: '1m'
